@@ -1,0 +1,32 @@
+static int[] rearrangeArray(int[] arr,int n){
+        Stack<Integer> pos = new Stack<>();
+        Stack<Integer> neg = new Stack<>();
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]>0){
+                pos.push(arr[i]);
+            }if(arr[i]<0){
+                neg.push(arr[i]);
+            }
+        }
+        if(pos.isEmpty() || neg.isEmpty()) return arr;
+        int[] myarr = new int[n];
+        int i=0;
+        for(;i<n;i++){
+            if(pos.isEmpty() || neg.isEmpty()) break;
+            if(i%2==0){
+                myarr[i]=neg.pop();
+            }else{
+                myarr[i]=pos.pop();
+            }
+        }
+        if(!pos.isEmpty()){
+            while(!pos.isEmpty()){
+                myarr[i++]=pos.pop();
+            }
+        }else{
+            while(!neg.isEmpty()){
+                myarr[i++]=pos.pop();
+            }
+        }
+        return myarr;
+    }
